@@ -1,5 +1,6 @@
 package com.codebynamdev.authn.service;
 
+import com.codebynamdev.authn.dto.DriverSignupRequest;
 import com.codebynamdev.authn.dto.SignupRequest;
 import com.codebynamdev.authn.entity.Role;
 import com.codebynamdev.authn.entity.User;
@@ -33,5 +34,7 @@ public class UserService {
         user.getRoles().add(userRole);
         userRepository.save(user);
     }
+    public void becomeDriver(String email, DriverSignupRequest driverSignupRequest){
 
+    }
 }
