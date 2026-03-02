@@ -10,7 +10,7 @@ public class SignupRequest {
     private String name;
     private String email;
     private String password;
-    private Long mobile;
+    private String mobile;
 
     public void setName(String name) {
         this.name = name;
@@ -24,7 +24,7 @@ public class SignupRequest {
         this.password = password;
     }
 
-    public void setMobile(Long mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
@@ -40,7 +40,7 @@ public class SignupRequest {
         return password;
     }
 
-    public Long getMobile() {
+    public String getMobile() {
         return mobile;
     }
 }

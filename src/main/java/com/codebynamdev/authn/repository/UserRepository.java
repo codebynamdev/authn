@@ -1,5 +1,6 @@
 package com.codebynamdev.authn.repository;
 
+import com.codebynamdev.authn.entity.Role;
 import com.codebynamdev.authn.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

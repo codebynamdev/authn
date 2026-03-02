@@ -1,4 +1,7 @@
 package com.codebynamdev.authn.repository;
 
-public class DriverProfileRepository {
+import com.codebynamdev.authn.entity.DriverProfile;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DriverProfileRepository extends JpaRepository<DriverProfile, Long> {
 }

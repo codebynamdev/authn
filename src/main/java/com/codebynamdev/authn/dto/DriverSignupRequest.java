@@ -14,6 +14,8 @@ public class DriverSignupRequest {
     private String vehicleModel;
     private String phoneNumber;
     private String address;
+    private String email;
+    private String password;
 
 
     //Getter
@@ -52,5 +54,13 @@ public class DriverSignupRequest {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
