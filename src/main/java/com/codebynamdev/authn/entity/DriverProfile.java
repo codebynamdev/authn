@@ -2,6 +2,7 @@ package com.codebynamdev.authn.entity;
 
 import jakarta.persistence.*;
 @Table(name = "driver_profile")
+@Entity
 public class DriverProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

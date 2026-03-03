@@ -2,6 +2,7 @@ package com.codebynamdev.authn.entity;
 
 import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
+@Entity
 @Table(name = "driver_document")
 public class DriverDocument {
     @Id
