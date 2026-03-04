@@ -1,5 +1,24 @@
 package com.codebynamdev.authn.controller;
 
-public class AuthController {
+import com.codebynamdev.authn.dto.AuthResponse;
+import com.codebynamdev.authn.dto.LoginRequest;
+import com.codebynamdev.authn.service.AuthnService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/api")
+public class AuthController {
+    private final AuthnService authnService;
+    public AuthController(AuthnService authnService) {
+        this.authnService = authnService;
+    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+        AuthResponse authResponse = authnService.authenticate(loginRequest);
+        return ResponseEntity.ok(authResponse);
+    }
 }

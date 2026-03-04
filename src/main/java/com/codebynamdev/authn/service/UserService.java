@@ -42,9 +42,9 @@ public class UserService {
         userRepository.save(user);
     }
     public void becomeDriver(DriverSignupRequest driverSignupRequest) throws IOException {
-        User user = userRepository.findByemail(driverSignupRequest.getEmail())
+        User user = userRepository.findByEmail(driverSignupRequest.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found with the provided email_id"));
-        if(!user.getPassword().equals(passwordEncoder.encode(driverSignupRequest.getPassword()))) {
+        if(!user.getPassword().matches(passwordEncoder.encode(driverSignupRequest.getPassword()))) {
             throw new RuntimeException("Password not match");
         }
         boolean alreadyDriver = user.getRoles().stream()

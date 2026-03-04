@@ -53,6 +53,5 @@ public class SignupController {
                     .status(HttpStatus.CONFLICT)
                     .body(response);
         }
-        }
     }
 }
