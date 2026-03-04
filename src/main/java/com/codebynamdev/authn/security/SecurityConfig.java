@@ -1,4 +1,4 @@
-package com.codebynamdev.authn.config;
+package com.codebynamdev.authn.security;
 
 import com.codebynamdev.authn.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
