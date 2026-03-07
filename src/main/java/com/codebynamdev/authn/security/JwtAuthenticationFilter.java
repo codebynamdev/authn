@@ -26,13 +26,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     //skipping when login request or signup
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getServletPath();
-        return path.equals("/api/signup") || path.equals("/api/login");
+        // ✅ Skip filter for public endpoints
+        System.out.println("path " + path);
+        return path.startsWith("/api/signup/create_user") || path.equals("/api/login");
     }
 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-            String header = request.getHeader("Authorization");
+        System.out.println("🔥 Filter processing: " + request.getMethod() + " " + request.getRequestURI());
+        String header = request.getHeader("Authorization");
+        System.out.println("📋 Auth header: " + (header != null ? "Present" : "Not present"));
 
             //check for header is notNull and in correct format
             if(header == null || !header.startsWith("Bearer ")) {

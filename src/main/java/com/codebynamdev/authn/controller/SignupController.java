@@ -18,8 +18,9 @@ public class SignupController {
     public SignupController(UserService userService) {
         this.userService = userService;
     }
-    @PostMapping("/user")
+    @PostMapping("/create_user")
     ResponseEntity<Map<String, String>>signUpAsUser(@RequestBody SignupRequest signupRequest) {
+        System.out.println("🎯🚀 CONTROLLER REACHED: /api/signup/create_user");
         Map<String, String>response = new HashMap<>();
         try{
             userService.registerUser(signupRequest);
@@ -36,10 +37,11 @@ public class SignupController {
                     .body(response);
         }
     }
-    @PostMapping("/driver")
+    @PostMapping("/create_driver")
     ResponseEntity<Map<String, String>>signupAsDriver(@RequestBody DriverSignupRequest driverSignupRequest) {
         Map<String, String>response = new HashMap<>();
         try{
+            System.out.println("user creation request");
             userService.becomeDriver(driverSignupRequest);
             response.put("message", "Applied as a driver");
             return ResponseEntity
