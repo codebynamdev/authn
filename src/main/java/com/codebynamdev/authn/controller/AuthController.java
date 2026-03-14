@@ -4,10 +4,7 @@ import com.codebynamdev.authn.dto.AuthResponse;
 import com.codebynamdev.authn.dto.LoginRequest;
 import com.codebynamdev.authn.service.AuthnService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")

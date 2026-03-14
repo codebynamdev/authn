@@ -11,11 +11,11 @@ public class DriverDocument {
 
     private String aadhaarNumber;
     @Lob
-    @Column(name = "aadhaar_document", columnDefinition = "BYTEA")
+    @Column(name = "aadhaar_document")
     private byte[] aadhaarDocument;
 
     @Lob
-    @Column(name = "license_document", columnDefinition = "BYTEA")
+    @Column(name = "license_document")
     private byte[] licenseDocument;
 
     @OneToOne

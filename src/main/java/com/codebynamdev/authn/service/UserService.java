@@ -5,6 +5,8 @@ import com.codebynamdev.authn.dto.SignupRequest;
 import com.codebynamdev.authn.entity.*;
 import com.codebynamdev.authn.repository.DriverDocumentRepository;
 import com.codebynamdev.authn.repository.DriverProfileRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.codebynamdev.authn.repository.RoleRepository;
@@ -19,6 +21,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private DriverProfileRepository driverProfileRepository;
     private DriverDocumentRepository driverDocumentRepository;
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, DriverProfileRepository driverProfileRepository, DriverDocumentRepository driverDocumentRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
@@ -43,8 +47,9 @@ public class UserService {
     }
     public void becomeDriver(DriverSignupRequest driverSignupRequest) throws IOException {
         User user = userRepository.findByEmail(driverSignupRequest.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found with the provided email_id"));
-        if(!user.getPassword().matches(passwordEncoder.encode(driverSignupRequest.getPassword()))) {
+                .orElseThrow(() -> new RuntimeException("User not found with the provided email_id " + driverSignupRequest.getEmail()));
+        if(!passwordEncoder.matches(driverSignupRequest.getPassword(), user.getPassword())) {
+            logger.info("user provided passwrod {}, saved password {}", passwordEncoder.encode(driverSignupRequest.getPassword()), user.getPassword());
             throw new RuntimeException("Password not match");
         }
         boolean alreadyDriver = user.getRoles().stream()
@@ -52,11 +57,13 @@ public class UserService {
         if(alreadyDriver) {
             throw new RuntimeException("Already Exist profile with Driver");
         }
+        System.out.println("password matched and not already driver");
         Role driverRole = roleRepository.findByName("DRIVER")
                 .orElseThrow(() -> new RuntimeException("Driver profile can't initiated from Admin side"));
         user.getRoles().add(driverRole);
 
-
+        logger.info("Aadhar document size = {}, license document size = {}", driverSignupRequest.getAadharDocument().getSize(), driverSignupRequest.getLicenseDocument().getSize());
+        logger.info("license document class => {}", driverSignupRequest.getLicenseDocument().getClass());
         DriverDocument driverDocument = new DriverDocument();
         driverDocument.setAadhaarDocument(driverSignupRequest.getAadharDocument().getBytes());
         driverDocument.setLicenseDocument(driverSignupRequest.getLicenseDocument().getBytes());
