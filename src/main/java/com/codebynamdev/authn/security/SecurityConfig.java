@@ -37,7 +37,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        System.out.println("In security Filter chain");
         http
                 // Disable CSRF for stateless APIs
                 .csrf(AbstractHttpConfigurer::disable)
